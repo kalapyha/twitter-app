@@ -13,14 +13,22 @@ public class User {
     @Past(message = "date of birth can't be a date in future or null")
     private LocalDate birthDate;
 
-    public User(UUID id, String name, LocalDate birthDate) {
+    @Size(min=5, message = "Role must be provided")
+    private UserRoles roles;
+
+    public User(UUID id, String name, LocalDate birthDate, UserRoles roles) {
         this.id = id;
         this.name = name;
         this.birthDate = birthDate;
+        this.roles = roles;
     }
 
     public UUID getId() {
         return id;
+    }
+
+    public UserRoles getRoles() {
+        return roles;
     }
 
     public void setId(UUID id) {
@@ -33,6 +41,10 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setRoles(UserRoles roles) {
+        this.roles = roles;
     }
 
     public LocalDate getBirthDate() {
@@ -49,6 +61,7 @@ public class User {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", birthDate=" + birthDate +
+                ", roles=" + roles +
                 '}';
     }
 }
