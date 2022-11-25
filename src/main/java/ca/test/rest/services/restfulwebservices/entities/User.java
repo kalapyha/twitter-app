@@ -1,11 +1,16 @@
 package ca.test.rest.services.restfulwebservices.entities;
 
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Size;
+
 import java.time.LocalDate;
 import java.util.UUID;
 
 public class User {
     private UUID id;
+    @Size(min=2, message = "Name should contain minimum 2 characters")
     private String name;
+    @Past(message = "date of birth can't be a date in future or null")
     private LocalDate birthDate;
 
     public User(UUID id, String name, LocalDate birthDate) {
