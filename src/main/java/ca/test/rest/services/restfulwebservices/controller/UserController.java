@@ -2,6 +2,7 @@ package ca.test.rest.services.restfulwebservices.controller;
 
 import ca.test.rest.services.restfulwebservices.dao.UserDaoService;
 import ca.test.rest.services.restfulwebservices.entities.User;
+import ca.test.rest.services.restfulwebservices.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,11 @@ public class UserController {
 
     @GetMapping("/users/{id}")
     public User retrieveUserById(@PathVariable UUID id) {
-        return userDaoService.getUserById(id);
+        User user = userDaoService.getUserById(id);
+        if(user == null) {
+            throw new UserNotFoundException("id: " + id);
+        }
+        return user;
     }
 
     @PostMapping("/users")
