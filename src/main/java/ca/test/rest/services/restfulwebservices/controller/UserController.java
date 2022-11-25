@@ -42,4 +42,9 @@ public class UserController {
         return ResponseEntity.created(location).build();
     }
 
+    @DeleteMapping("/users/{id}")
+    public void deleteUserById(@PathVariable UUID id) {
+        userDaoService.removeUserById(id);
+    }
+
 }

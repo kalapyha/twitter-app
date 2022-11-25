@@ -7,10 +7,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Predicate;
 
 @Component
 public class UserDaoService {
     private static List<User> users = new ArrayList();
+
 
     {
         users.add(new User(UUID.randomUUID(),"John", LocalDate.now().minusYears(51)));
@@ -22,8 +24,14 @@ public class UserDaoService {
         return users;
     }
 
+
     public User getUserById(UUID id) {
         return users.stream().filter(user -> user.getId().equals(id)).findAny().orElse(null);
+    }
+
+    public void removeUserById(UUID id) {
+        Predicate<? super User> predicate = user -> user.getId().equals(id);
+        users.removeIf(predicate);
     }
 
     public User saveUser(User user) {
