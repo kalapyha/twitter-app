@@ -24,14 +24,17 @@ public class User {
     @Past(message = "date of creation can't be a date in future or null")
     private LocalDate created;
 
+    private Boolean producer;
+
     // TODO need to link user roles
     // TODO need to link user subscription and followers
 
-    public User(UUID id, String name, String email, LocalDate created) {
+    public User(UUID id, String name, String email, LocalDate created, Boolean producer) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.created = created;
+        this.producer = producer;
     }
 
     public User() {
@@ -44,6 +47,14 @@ public class User {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public Boolean getProducer() {
+        return producer;
+    }
+
+    public void setProducer(Boolean publisher) {
+        this.producer = publisher;
     }
 
     public String getName() {

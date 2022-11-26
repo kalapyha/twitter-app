@@ -14,11 +14,11 @@ import java.util.function.Predicate;
 public class UserDaoService {
     private static List<User> users = new ArrayList();
 
-    {
-        users.add(new User(UUID.randomUUID(),"John", "john@gmail.com", LocalDate.now().minusYears(1)));
-        users.add(new User(UUID.randomUUID(),"Bob", "bob@yahoo.com", LocalDate.now().minusYears(4)));
-        users.add(new User(UUID.randomUUID(),"Michael", "michael404@igo.com", LocalDate.now().minusYears(3)));
-    }
+//    {
+//        users.add(new User(UUID.randomUUID(),"John", "john@gmail.com", LocalDate.now().minusYears(1)));
+//        users.add(new User(UUID.randomUUID(),"Bob", "bob@yahoo.com", LocalDate.now().minusYears(4)));
+//        users.add(new User(UUID.randomUUID(),"Michael", "michael404@igo.com", LocalDate.now().minusYears(3)));
+//    }
 
     public List<User> getUsers() {
         return users;
