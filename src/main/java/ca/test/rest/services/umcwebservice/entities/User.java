@@ -25,6 +25,7 @@ public class User {
     private LocalDate created;
 
     // TODO need to link user roles
+    // TODO need to link user subscription and followers
 
     public User(UUID id, String name, String email, LocalDate created) {
         this.id = id;
