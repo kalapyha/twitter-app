@@ -1,4 +1,4 @@
-package ca.test.rest.services.restfulwebservices.entities;
+package ca.test.rest.services.umcwebservice.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

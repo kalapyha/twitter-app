@@ -1,4 +1,4 @@
-package ca.test.rest.services.restfulwebservices;
+package ca.test.rest.services.umcwebservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

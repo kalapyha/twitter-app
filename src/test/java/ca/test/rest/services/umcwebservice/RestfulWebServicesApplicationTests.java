@@ -1,4 +1,4 @@
-package ca.test.rest.services.restfulwebservices;
+package ca.test.rest.services.umcwebservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

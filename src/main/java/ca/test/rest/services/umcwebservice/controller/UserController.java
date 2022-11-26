@@ -1,46 +1,46 @@
-package ca.test.rest.services.restfulwebservices.controller;
+package ca.test.rest.services.umcwebservice.controller;
 
-import ca.test.rest.services.restfulwebservices.dao.UserDaoService;
-import ca.test.rest.services.restfulwebservices.entities.User;
-import ca.test.rest.services.restfulwebservices.exceptions.UserNotFoundException;
+import ca.test.rest.services.umcwebservice.entities.User;
+import ca.test.rest.services.umcwebservice.exceptions.UserNotFoundException;
+import ca.test.rest.services.umcwebservice.repository.UserRepository;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
 public class UserController {
+    private UserRepository repository;
 
-    @Autowired
-    private UserDaoService userDaoService;
+    public UserController(UserRepository repository) {
+        this.repository = repository;
+    }
+
 
     @GetMapping("/users")
     public List<User> retrieveAllUsers() {
-        return userDaoService.getUsers();
+        return repository.findAll();
     }
 
     @GetMapping("/users/{id}")
-    public User retrieveUserById(@PathVariable UUID id) {
-        User user = userDaoService.getUserById(id);
-        if(user == null) {
+    public Optional<User> retrieveUserById(@PathVariable UUID id) {
+        Optional<User> user = repository.findById(id);
+        if(user.isEmpty()) {
             throw new UserNotFoundException("id: " + id);
         }
         return user;
     }
 
-//    @GetMapping("/users/role={role}")
-//    public List<User> retrieveUserByRole(@PathVariable UserRoles role) {
-//        return userDaoService.getUsersByRole(role);
-//    }
+    //TODO need to create getUserByRoleID
 
     @PostMapping("/users")
     public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
-        User savedUser = userDaoService.saveUser(user);
+        User savedUser = repository.save(user);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(savedUser.getId())
@@ -50,7 +50,7 @@ public class UserController {
 
     @DeleteMapping("/users/{id}")
     public void deleteUserById(@PathVariable UUID id) {
-        userDaoService.removeUserById(id);
+        repository.deleteById(id);
     }
 
 }

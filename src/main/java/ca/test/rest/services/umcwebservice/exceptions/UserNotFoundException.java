@@ -1,4 +1,4 @@
-package ca.test.rest.services.restfulwebservices.exceptions;
+package ca.test.rest.services.umcwebservice.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

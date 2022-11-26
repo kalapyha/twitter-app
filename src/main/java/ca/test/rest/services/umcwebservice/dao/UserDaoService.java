@@ -1,6 +1,6 @@
-package ca.test.rest.services.restfulwebservices.dao;
+package ca.test.rest.services.umcwebservice.dao;
 
-import ca.test.rest.services.restfulwebservices.entities.User;
+import ca.test.rest.services.umcwebservice.entities.User;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -9,10 +9,10 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.Predicate;
 
+// TODO no need for this component? Retrieving data from DB in UserController now
 @Component
 public class UserDaoService {
     private static List<User> users = new ArrayList();
-
 
     {
         users.add(new User(UUID.randomUUID(),"John", "john@gmail.com", LocalDate.now().minusYears(1)));
@@ -28,10 +28,6 @@ public class UserDaoService {
     public User getUserById(UUID id) {
         return users.stream().filter(user -> user.getId().equals(id)).findAny().orElse(null);
     }
-
-//    public List<User> getUsersByRole(UserRoles role) {
-//        return users.stream().filter(user -> user.getRoles().equals(role)).collect(Collectors.toList());
-//    }
 
     public void removeUserById(UUID id) {
         Predicate<? super User> predicate = user -> user.getId().equals(id);

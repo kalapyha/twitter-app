@@ -1,6 +1,4 @@
-package ca.test.rest.services.restfulwebservices.entities;
-
-import org.springframework.stereotype.Component;
+package ca.test.rest.services.umcwebservice.entities;
 
 public class Message {
 
