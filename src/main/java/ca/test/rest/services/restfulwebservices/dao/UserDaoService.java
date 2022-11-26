@@ -1,7 +1,6 @@
 package ca.test.rest.services.restfulwebservices.dao;
 
 import ca.test.rest.services.restfulwebservices.entities.User;
-import ca.test.rest.services.restfulwebservices.entities.UserRoles;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -9,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 @Component
 public class UserDaoService {
@@ -17,9 +15,9 @@ public class UserDaoService {
 
 
     {
-        users.add(new User(UUID.randomUUID(),"John", LocalDate.now().minusYears(51), UserRoles.SUBSCRIBER));
-        users.add(new User(UUID.randomUUID(),"Bob", LocalDate.now().minusYears(31), UserRoles.SUBSCRIBER));
-        users.add(new User(UUID.randomUUID(),"Michael", LocalDate.now().minusYears(36), UserRoles.PROVIDER_AND_SUBSCRIBER));
+        users.add(new User(UUID.randomUUID(),"John", "john@gmail.com", LocalDate.now().minusYears(1)));
+        users.add(new User(UUID.randomUUID(),"Bob", "bob@yahoo.com", LocalDate.now().minusYears(4)));
+        users.add(new User(UUID.randomUUID(),"Michael", "michael404@igo.com", LocalDate.now().minusYears(3)));
     }
 
     public List<User> getUsers() {
@@ -31,9 +29,9 @@ public class UserDaoService {
         return users.stream().filter(user -> user.getId().equals(id)).findAny().orElse(null);
     }
 
-    public List<User> getUsersByRole(UserRoles role) {
-        return users.stream().filter(user -> user.getRoles().equals(role)).collect(Collectors.toList());
-    }
+//    public List<User> getUsersByRole(UserRoles role) {
+//        return users.stream().filter(user -> user.getRoles().equals(role)).collect(Collectors.toList());
+//    }
 
     public void removeUserById(UUID id) {
         Predicate<? super User> predicate = user -> user.getId().equals(id);

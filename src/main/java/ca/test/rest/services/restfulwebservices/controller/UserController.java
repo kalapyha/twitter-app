@@ -2,7 +2,6 @@ package ca.test.rest.services.restfulwebservices.controller;
 
 import ca.test.rest.services.restfulwebservices.dao.UserDaoService;
 import ca.test.rest.services.restfulwebservices.entities.User;
-import ca.test.rest.services.restfulwebservices.entities.UserRoles;
 import ca.test.rest.services.restfulwebservices.exceptions.UserNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +33,10 @@ public class UserController {
         return user;
     }
 
-    @GetMapping("/users/role={role}")
-    public List<User> retrieveUserById(@PathVariable UserRoles role) {
-        return userDaoService.getUsersByRole(role);
-    }
+//    @GetMapping("/users/role={role}")
+//    public List<User> retrieveUserByRole(@PathVariable UserRoles role) {
+//        return userDaoService.getUsersByRole(role);
+//    }
 
     @PostMapping("/users")
     public ResponseEntity<User> createUser(@Valid @RequestBody User user) {

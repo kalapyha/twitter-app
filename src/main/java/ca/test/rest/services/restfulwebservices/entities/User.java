@@ -1,34 +1,44 @@
 package ca.test.rest.services.restfulwebservices.entities;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
+@Entity(name = "ums")
 public class User {
+
+    @Id
+    @GeneratedValue
     private UUID id;
     @Size(min=2, message = "Name should contain minimum 2 characters")
     private String name;
-    @Past(message = "date of birth can't be a date in future or null")
-    private LocalDate birthDate;
 
-    @Size(min=5, message = "Role must be provided")
-    private UserRoles roles;
+    @Email
+    private String email;
+    @Past(message = "date of creation can't be a date in future or null")
+    private LocalDate created;
 
-    public User(UUID id, String name, LocalDate birthDate, UserRoles roles) {
+    // TODO need to link user roles
+
+    public User(UUID id, String name, String email, LocalDate created) {
         this.id = id;
         this.name = name;
-        this.birthDate = birthDate;
-        this.roles = roles;
+        this.email = email;
+        this.created = created;
+    }
+
+    public User() {
+
     }
 
     public UUID getId() {
         return id;
-    }
-
-    public UserRoles getRoles() {
-        return roles;
     }
 
     public void setId(UUID id) {
@@ -43,16 +53,20 @@ public class User {
         this.name = name;
     }
 
-    public void setRoles(UserRoles roles) {
-        this.roles = roles;
+    public String getEmail() {
+        return email;
     }
 
-    public LocalDate getBirthDate() {
-        return birthDate;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+    public LocalDate getCreated() {
+        return created;
+    }
+
+    public void setCreated(LocalDate created) {
+        this.created = created;
     }
 
     @Override
@@ -60,8 +74,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", birthDate=" + birthDate +
-                ", roles=" + roles +
+                ", created=" + created +
                 '}';
     }
 }
